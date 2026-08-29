@@ -40,6 +40,60 @@ en `http://127.0.0.1:4321/pantagruel-research/`.
 
 2026-08-16 — Fusionadas las skills separadas de LinkedIn y X en la skill global `pantagruel-research-social-announce`, conservando copy, previsualización, confirmación, publicación y verificación independientes por red.
 
+#### Material contextual preservado
+
+Los bloques siguientes conservan informes, diseños, decisiones, preguntas y evidencia de la evolución de la contribución sin resumir ni descartar su contenido. Su redacción original no los vuelve vinculantes por sí sola: la proyección activa se limita a `Restrictions`, la orientación no vinculante de `Guide` cuando exista y las condiciones de `Goals`.
+
+#### Technical design
+
+#### Key decisions
+
+1. `docs/` será la única fuente editorial versionada. La colección Astro y los
+   adjuntos servidos se generarán antes de cada build.
+2. Pre usará `npm run build` seguido de
+   `npm run preview -- --host 127.0.0.1`; no habrá deploy remoto ni git hook.
+3. La skill de publicación resolverá el slug construido, comunicará la URL
+   local exacta y protegerá las fronteras `develop`/`main`.
+4. El workflow de producción existente seguirá limitado a `main` y ejecutará
+   la misma sincronización mediante el ciclo npm.
+5. La primera entrega del issue implementará Development → Pre → Pro. La
+   segunda entrega abordará LinkedIn y X mediante una única skill global sobre
+   esa base ya validada.
+
+#### Architecture
+
+```text
+article/<issue-number>-<slug>
+└── docs/YYYY-MM-DD-<slug>/
+    ├── YYYY-MM-DD-<slug>.md
+    └── adjuntos
+             │ merge
+             ▼
+          develop ── sync → build → preview local → URL exacta
+             │
+             │ aprobación + merge
+             ▼
+            main ── sync → build → GitHub Pages → URL online
+```
+
+`scripts/sync-articles.mjs` validará las carpetas canónicas, generará de forma
+determinista `src/content/blog/` y proyectará adjuntos en `public/`. La ejecución
+repetida con la misma entrada producirá el mismo árbol. La skill comparará la
+rama del artículo con `develop` y rechazará más de una carpeta canónica o
+cambios ajenos. Los errores se propagarán con salida no cero para detener npm o
+GitHub Actions.
+
+Las referencias relativas a adjuntos se resolverán durante la proyección sin
+alterar el Markdown canónico, mediante el árbol sintáctico CommonMark y sin
+reescribir ejemplos de código. La proyección se preparará en árboles temporales,
+rechazará destinos simbólicos y sustituirá los árboles generados con rollback.
+Los metadatos sociales y RSS incorporarán el `base` de GitHub Pages y
+utilizarán la misma ruta de artículo que Astro genera.
+
+La skill `publish-pantagruel-article` tendrá dos fronteras operativas: preview
+desde `develop` y producción desde `main` después de confirmación. No duplicará
+la lógica de sincronización, sino que invocará el script, el build y la preview.
+
 ### Restrictions
 
 Una rama de artículo contiene exactamente un artículo y sus adjuntos.
@@ -160,53 +214,3 @@ se pueden preparar o publicar anuncios independientes en LinkedIn y X.
 
 Todo fallo de validación, build, preview, despliegue o verificación detiene el
 recorrido y se comunica sin afirmar que la etapa haya terminado.
-
-#### Technical design
-
-#### Key decisions
-
-1. `docs/` será la única fuente editorial versionada. La colección Astro y los
-   adjuntos servidos se generarán antes de cada build.
-2. Pre usará `npm run build` seguido de
-   `npm run preview -- --host 127.0.0.1`; no habrá deploy remoto ni git hook.
-3. La skill de publicación resolverá el slug construido, comunicará la URL
-   local exacta y protegerá las fronteras `develop`/`main`.
-4. El workflow de producción existente seguirá limitado a `main` y ejecutará
-   la misma sincronización mediante el ciclo npm.
-5. La primera entrega del issue implementará Development → Pre → Pro. La
-   segunda entrega abordará LinkedIn y X mediante una única skill global sobre
-   esa base ya validada.
-
-#### Architecture
-
-```text
-article/<issue-number>-<slug>
-└── docs/YYYY-MM-DD-<slug>/
-    ├── YYYY-MM-DD-<slug>.md
-    └── adjuntos
-             │ merge
-             ▼
-          develop ── sync → build → preview local → URL exacta
-             │
-             │ aprobación + merge
-             ▼
-            main ── sync → build → GitHub Pages → URL online
-```
-
-`scripts/sync-articles.mjs` validará las carpetas canónicas, generará de forma
-determinista `src/content/blog/` y proyectará adjuntos en `public/`. La ejecución
-repetida con la misma entrada producirá el mismo árbol. La skill comparará la
-rama del artículo con `develop` y rechazará más de una carpeta canónica o
-cambios ajenos. Los errores se propagarán con salida no cero para detener npm o
-GitHub Actions.
-
-Las referencias relativas a adjuntos se resolverán durante la proyección sin
-alterar el Markdown canónico, mediante el árbol sintáctico CommonMark y sin
-reescribir ejemplos de código. La proyección se preparará en árboles temporales,
-rechazará destinos simbólicos y sustituirá los árboles generados con rollback.
-Los metadatos sociales y RSS incorporarán el `base` de GitHub Pages y
-utilizarán la misma ruta de artículo que Astro genera.
-
-La skill `publish-pantagruel-article` tendrá dos fronteras operativas: preview
-desde `develop` y producción desde `main` después de confirmación. No duplicará
-la lógica de sincronización, sino que invocará el script, el build y la preview.

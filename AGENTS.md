@@ -39,10 +39,10 @@ corpus editorial, no contratos de tareas retroactivas.
 
 ## **Planificación y contratos**
 
-El [GitHub Project `pantagruel-research`](https://github.com/users/pantagruel-alpha/projects/4)
-es el backlog exclusivo de este producto. Es independiente del [GitHub Project
-`pantagruel`](https://github.com/users/pantagruel-alpha/projects/3) y no debe
-consultarse este último para responder sobre «backlog», «tareas activas» o
+El [Panel de Notion](https://app.notion.com/p/5f9adc0336964ffe95abcf27631569d9)
+es el inventario canónico, usando `Pantagruel Research` como proyecto para este producto.
+Es independiente de las entradas clasificadas como `Pantagruel` y no deben
+consultarse estas últimas para responder sobre «backlog», «tareas activas» o
 cualquier concepto equivalente dentro de este repositorio, salvo que el usuario
 solicite expresamente una consulta transversal. Las tareas de este proyecto son
 issues de `pantagruel-alpha/pantagruel-research`; sus

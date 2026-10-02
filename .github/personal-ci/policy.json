@@ -1,0 +1,9 @@
+{
+  "repository": "aprendesc/pantagruel-research",
+  "role": "origin",
+  "origin": "aprendesc/pantagruel-research",
+  "upstream": "pantagruel-alpha/pantagruel-research",
+  "origin_develop_tests": false,
+  "upstream_develop_unit_tests_required": false,
+  "release_branch": "main"
+}

@@ -65,4 +65,4 @@ Obtain separate final confirmation for each network before each external publica
 
 ## Personal continuous integration
 
-Follow [the repository CI policy](docs/personal-ci.md). Integrate numbered contribution branches into `origin/develop` without required unit tests. For a distinct personal or Pantagruel upstream, prepare a clean numbered branch and use a PR into upstream develop. Validate publication changes before the release PR into main. This policy supersedes earlier integration instructions where they conflict. Keep corporate upstream procedures unchanged.
+Follow [the repository CI policy](.github/personal-ci/README.md). Integrate numbered contribution branches into `origin/develop` without required unit tests. For a distinct personal or Pantagruel upstream, prepare a clean numbered branch and use a PR into upstream develop. Validate publication changes before the release PR into main. This policy supersedes earlier integration instructions where they conflict. Keep corporate upstream procedures unchanged.

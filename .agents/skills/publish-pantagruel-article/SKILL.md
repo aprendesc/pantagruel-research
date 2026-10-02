@@ -7,92 +7,76 @@ description: Prepare, preview, publish, republish, or verify one Pantagruel Rese
 
 ## Explicar el flujo de forma didáctica
 
-Cuando el usuario pregunte cómo se publica, explicar antes de actuar y no
-modificar ramas, abrir merges, desplegar ni publicar nada. Adaptar el detalle a
-su nivel y presentar el recorrido en este orden:
+When the user asks how publication works, explain before taking action. Do not change branches, open merges, deploy, or publish anything. Adapt the detail to the user's knowledge. Present the workflow in this order:
 
-1. **Desarrollo**: cada artículo tiene una issue, una rama
-   `article/<issue-number>-<short-kebab-name>` creada desde `develop` y una sola
-   carpeta canónica `docs/YYYY-MM-DD-<slug>/` con su Markdown y adjuntos.
-2. **Pre local**: al integrar la rama en `develop`, ejecutar pruebas y build,
-   iniciar la preview y facilitar la URL local exacta. Aclarar que `develop` no
-   publica nada en Internet.
-3. **Revisión**: el usuario inspecciona el artículo. Si solicita correcciones,
-   volver a la misma rama del artículo, repetir la integración y generar una
-   nueva preview; cualquier aprobación anterior queda invalidada.
-4. **Producción**: solo tras la aprobación explícita de la preview vigente,
-   integrar `develop` en `main`; GitHub Pages despliega y después se verifica la
-   URL pública exacta.
-5. **Difusión**: explicar LinkedIn y X como pasos posteriores, opcionales e
-   independientes, gobernados por la skill global
-   `$pantagruel-research-social-announce` y con confirmación final por red.
+1. **Desarrollo**: Each article has an issue, an `article/<issue-number>-<short-kebab-name>` branch created from `develop`, and one canonical `docs/YYYY-MM-DD-<slug>/` folder with its Markdown and attachments.
+2. **Pre local**: After integrating the branch into `develop`, run tests and the build. Start the preview and provide its exact local URL. Explain that `develop` publishes nothing on the Internet.
+3. **Revisión**: The user inspects the article. If corrections are requested, return to the same article branch, repeat integration, and generate a new preview. This invalidates any earlier approval.
+4. **Producción**: Integrate `develop` into `main` only after explicit approval of the current preview. GitHub Pages deploys the article. Then verify the exact public URL.
+5. **Difusión**: Explain LinkedIn and X as subsequent, optional, independent steps. Follow the global `$pantagruel-research-social-announce` skill and require final confirmation for each network.
 
-Comenzar con un resumen sencillo como
+Start with a simple summary, such as
 `rama del artículo → develop/preview local → aprobación → main/producción`.
-Definir cualquier término Git necesario, mostrar los comandos y URLs útiles
-junto a la fase correspondiente y terminar indicando el estado actual y cuál
-sería la siguiente decisión del usuario. No confundir la explicación con una
-autorización para ejecutar el flujo.
+Define necessary Git terms. Show useful commands and URLs beside the applicable phase. End with the current state and the user's next decision. An explanation does not authorize execution of the workflow.
 
 ## Respetar las fronteras
 
-- Tratar `docs/YYYY-MM-DD-<slug>/` como única fuente editorial. No editar ni versionar manualmente sus proyecciones en `src/content/blog/` o `public/`.
-- Exigir para cada artículo una issue propia de `documental-contribution` y mantener la relación 1:1 con su rama `article/<issue-number>-<short-kebab-name>`, creada desde `develop` y limitada a un artículo.
-- Usar `develop` únicamente para construir y servir una preview local. No desplegar pre ni introducir servicios o estados adicionales.
-- Integrar `develop` en `main` solo después de que el usuario apruebe explícitamente la preview actual. Un permiso general para publicar no sustituye esa aprobación posterior.
-- Detener el recorrido ante cualquier fallo y comunicarlo sin afirmar que la etapa terminó.
-- Conservar cambios ajenos y excluirlos de commits, merges y pushes.
+- Treat `docs/YYYY-MM-DD-<slug>/` as the only editorial source. Do not manually edit or version its projections in `src/content/blog/` or `public/`.
+- Require a separate `documental-contribution` issue for each article. Keep its 1:1 relationship with its `article/<issue-number>-<short-kebab-name>` branch, created from `develop` and limited to one article.
+- Use `develop` only to build and serve a local preview. Do not deploy a preproduction environment or add services or states.
+- Integrate `develop` into `main` only after the user explicitly approves the current preview. General permission to publish does not replace this later approval.
+- Stop the workflow at any failure. Report it without claiming that the phase completed.
+- Preserve unrelated changes and exclude them from commits, merges, and pushes.
 
 ## Preparar e integrar el artículo
 
-1. Resolver un artículo concreto e inequívoco. Exigir que carpeta y Markdown compartan `YYYY-MM-DD-<slug>` y que los adjuntos permanezcan en esa carpeta.
-2. Revisar el estado, actualizar referencias remotas y confirmar que la issue, la rama y el artículo mantienen trazabilidad 1:1.
-3. Inspeccionar `git diff --name-status origin/develop...HEAD`. Exigir que todas las rutas pertenezcan a una única carpeta canónica `docs/YYYY-MM-DD-<slug>/`; rechazar más carpetas de artículo o cualquier cambio no relacionado.
-4. Validar el Markdown y sus adjuntos con las pruebas y comandos vigentes del repositorio. No reproducir manualmente la lógica del generador.
-5. Integrar la rama del artículo en `develop` mediante el mecanismo habitual del repositorio, sin publicar `main`.
+1. Identify one specific, unambiguous article. Require the folder and Markdown to share `YYYY-MM-DD-<slug>`. Keep attachments in that folder.
+2. Review the state and update remote references. Confirm 1:1 traceability between the issue, branch, and article.
+3. Inspect `git diff --name-status origin/develop...HEAD`. Require every path to belong to one canonical `docs/YYYY-MM-DD-<slug>/` folder. Reject additional article folders or unrelated changes.
+4. Validate Markdown and attachments with the repository's current tests and commands. Do not manually reproduce the generator's logic.
+5. Integrate the article branch into `develop` with the repository's usual mechanism. Do not publish `main`.
 
 ## Servir la preview local
 
-1. Activar `develop` actualizado e instalar dependencias con `npm ci` cuando sea necesario.
-2. Ejecutar las pruebas de publicación, `npm run build` y `git diff --check`. El build debe generar desde `docs/` las superficies de Astro y dejar la proyección idéntica a la fuente canónica.
-3. Resolver la ruta realmente construida del artículo en `dist/blog/<slug>/index.html`; no deducirla solo del nombre del archivo porque puede derivarse del título.
-4. Iniciar la preview desde `develop`:
+1. Activate the updated `develop` branch. Install dependencies with `npm ci` when necessary.
+2. Run the publication tests, `npm run build`, and `git diff --check`. The build must generate the Astro surfaces from `docs/` and leave the projection identical to the canonical source.
+3. Resolve the article's actual built path in `dist/blog/<slug>/index.html`. Do not infer it only from the filename, because it can be derived from the title.
+4. Start the preview from `develop`:
 
 ```bash
 npm run preview -- --host 127.0.0.1
 ```
 
-5. Comprobar una respuesta HTTP correcta y comunicar la URL exacta:
+5. Check for a correct HTTP response and report the exact URL:
 
 ```text
 http://127.0.0.1:4321/pantagruel-research/blog/<slug>/
 ```
 
-6. Mantener producción intacta y solicitar la aprobación explícita de esa preview antes de continuar.
+6. Keep production intact. Request explicit approval of this preview before continuing.
 
 ## Corregir tras la preview
 
-1. Volver a la misma `article/<issue-number>-<short-kebab-name>` e incorporar en ella el `develop` vigente.
-2. Modificar únicamente el Markdown canónico o sus adjuntos en `docs/`.
-3. Reintegrar la rama en `develop` y repetir build, validaciones, preview y comunicación de la URL exacta.
-4. Considerar caducada cualquier aprobación anterior cuando cambie el artículo; solicitar otra aprobación sobre la nueva preview.
+1. Return to the same `article/<issue-number>-<short-kebab-name>` branch and integrate the current `develop` into it.
+2. Change only the canonical Markdown or its attachments in `docs/`.
+3. Integrate the branch into `develop` again. Repeat the build, validations, preview, and report of the exact URL.
+4. Treat every earlier approval as expired when the article changes. Request new approval for the new preview.
 
 ## Publicar en producción
 
-1. Confirmar que la aprobación explícita corresponde al contenido actualmente validado en `develop` y registrar el commit aprobado.
-2. Integrar `develop` en `main` sin alterar ni omitir contenido ajeno de ninguna rama. Empujar `main` solo si todas las validaciones siguen pasando.
-3. Esperar al workflow `Deploy to GitHub Pages` asociado al commit de `main` y exigir conclusión satisfactoria.
-4. Resolver y consultar la URL online exacta del mismo slug:
+1. Confirm that explicit approval applies to the content currently validated in `develop`. Record the approved commit.
+2. Integrate `develop` into `main` without changing or omitting unrelated content from either branch. Push `main` only if all validations still pass.
+3. Wait for the `Deploy to GitHub Pages` workflow associated with the `main` commit. Require successful completion.
+4. Resolve and inspect the exact online URL for the same slug:
 
 ```text
 https://pantagruel-alpha.github.io/pantagruel-research/blog/<slug>/
 ```
 
-5. Verificar respuesta HTTP correcta y que la página corresponde al artículo aprobado. Informar commits, resultado del workflow y URL final.
-6. Si el despliegue o la comprobación falla, diagnosticar y comunicar el fallo; no declarar el artículo publicado.
+5. Verify a correct HTTP response and confirm that the page matches the approved article. Report commits, workflow result, and final URL.
+6. If deployment or verification fails, diagnose and report the failure. Do not declare the article published.
 
 ## Mantener separada la difusión
 
-- No preparar ni publicar LinkedIn o X como efecto lateral de este flujo.
-- Usar `$pantagruel-research-social-announce` y exigir confirmación final por
-  red, siempre después de verificar producción.
+- Do not prepare or publish LinkedIn or X posts as a side effect of this workflow.
+- Use `$pantagruel-research-social-announce`. Require final confirmation for each network, always after verifying production.

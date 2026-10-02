@@ -2,7 +2,7 @@
 
 ### Context
 
-El contrato declara las skills documental-contribution. La contribución figura en estado In progress. La responsabilidad está asignada a aprendesc. La trazabilidad conserva las etiquetas skill:documental-contribution y el milestone 001 — Publicación editorial.
+El contrato declara las skills documental-contribution. La contribución figura en estado Backlog. La responsabilidad está asignada a aprendesc. La trazabilidad conserva las etiquetas skill:documental-contribution y el milestone 001 — Publicación editorial.
 
 Pantagruel Research necesita un ciclo editorial reproducible que mantenga un
 único Markdown canónico por artículo, permita revisarlo localmente antes de
@@ -96,47 +96,45 @@ la lógica de sincronización, sino que invocará el script, el build y la previ
 
 ### Restrictions
 
-Una rama de artículo contiene exactamente un artículo y sus adjuntos.
+Each article branch must contain exactly one article and its attachments.
 
-`develop` nunca despliega en Internet; `main` es la única rama de producción.
+`develop` must never deploy to the Internet. `main` is the only production branch.
 
-No se introducen hosting de pre, estados adicionales ni servicios nuevos.
+Do not add pre hosting, additional states or new services.
 
-El merge a `main` requiere aprobación explícita tras revisar pre.
+Obtain explicit approval to merge to `main` after the pre review.
 
-Las publicaciones externas requieren su propia confirmación final y nunca se disparan como efecto lateral de un despliegue.
+External publications require their own final confirmation. Do not trigger them as a side effect of deployment.
 
-Se preservan URLs, artículos y cambios ajenos existentes.
+Keep existing URLs, articles and unrelated changes.
 
-Mantener instrucciones concisas, imperativas y autosuficientes. Separar con
-claridad desarrollo, pre local, producción y difusión externa. No duplicar el
-contrato del issue dentro de `AGENTS.md`.
+Keep instructions short, imperative and self-contained. Separate development, local pre, production and external distribution clearly. Do not duplicate the issue contract inside `AGENTS.md`.
 
 ### Guide
 
-**Surfaces**: código Node/Astro, configuración npm, workflow editorial, contexto de proyecto y skills locales.
+**Surfaces**: Node/Astro code, npm configuration, editorial workflow, project context and local skills.
 
-**Coding guidelines**: implementación mínima y explícita según las convenciones JavaScript/Astro del repositorio.
+**Coding guidelines**: Use a minimal, explicit implementation that follows the repository’s JavaScript/Astro conventions.
 
-**Governing skills**: `documental-contribution` para `AGENTS.md` y las skills.
+**Governing skills**: Use `documental-contribution` for `AGENTS.md` and the skills.
 
-**Target paths**: `AGENTS.md`, `scripts/`, `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `.gitignore`, `.github/workflows/deploy.yml`, `src/components/BaseHead.astro`, `src/pages/rss.xml.js`, `.agents/skills/`, `.claude/skills/` y `tests/`.
+**Target paths**: `AGENTS.md`, `scripts/`, `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `.gitignore`, `.github/workflows/deploy.yml`, `src/components/BaseHead.astro`, `src/pages/rss.xml.js`, `.agents/skills/`, `.claude/skills/` and `tests/`.
 
-**Purpose / outcomes**: redactar un artículo una sola vez, revisarlo como web en local y publicarlo online únicamente después de aprobarlo.
+**Purpose / outcomes**: Write each article once. Review it as a local website. Publish it online only after approval.
 
-**Scope / exclusions**: incluye el ciclo editorial, su automatización y las skills de difusión; excluye un entorno remoto de pre y la publicación real de un artículo o anuncio durante la implementación.
+**Scope / exclusions**: Include the editorial cycle, its automation and distribution skills. Exclude a remote pre environment and actual publication of an article or announcement during implementation.
 
-**Sources**: decisiones del usuario de 2026-08-10 y estructura actual de `docs/`, Astro y GitHub Pages.
+**Sources**: User decisions of 2026-08-10 and the current structure of `docs/`, Astro and GitHub Pages.
 
-**Objective / scope**: generar la colección Astro desde `docs/`, servirla en local desde `develop` y reutilizar la misma generación en el build de `main`.
+**Objective / scope**: Generate the Astro collection from `docs/`. Serve it locally from `develop`. Reuse the same generation in the `main` build.
 
-**Target paths**: `scripts/sync-articles.mjs`, `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `.gitignore`, `.github/workflows/deploy.yml`, `src/components/BaseHead.astro`, `src/pages/rss.xml.js`, `.agents/skills/publish-pantagruel-article/`, su espejo de Claude y `tests/article-publication/`.
+**Target paths**: `scripts/sync-articles.mjs`, `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `.gitignore`, `.github/workflows/deploy.yml`, `src/components/BaseHead.astro`, `src/pages/rss.xml.js`, `.agents/skills/publish-pantagruel-article/`, its Claude mirror and `tests/article-publication/`.
 
-**Stack / dependencies**: Node.js 20, Astro 4, APIs estándar de Node, `unified`/`remark-parse` para interpretar CommonMark y GitHub Actions existente; no añadir servicios ni dependencias de runtime.
+**Stack / dependencies**: Use Node.js 20, Astro 4, standard Node APIs, `unified`/`remark-parse` to interpret CommonMark and existing GitHub Actions. Do not add services or runtime dependencies.
 
-**Coding guidelines**: implementación mínima, explícita y conforme a las convenciones JavaScript/Astro existentes.
+**Coding guidelines**: Use a minimal, explicit implementation that follows existing JavaScript/Astro conventions.
 
-**Accepted requirements**: una rama por artículo, un Markdown canónico, preview solo local y producción solo desde `main`.
+**Accepted requirements**: One branch per article, one canonical Markdown, local preview only and production only from `main`.
 
 **Type**: external
 
@@ -146,71 +144,62 @@ contrato del issue dentro de `AGENTS.md`.
 
 #### Table of contents
 
-Contexto del proyecto: decisión duradera «una rama, un artículo» y relación entre `develop` y `main`.
+Project context: Record the durable “one branch, one article” decision and the relationship between `develop` and `main`.
 
-Publicación: preparación del artículo, preview local, aprobación, producción y verificación.
+Publication: Include article preparation, local preview, approval, production and verification.
 
-Difusión: límites y dependencias posteriores para LinkedIn y X.
+Distribution: Include subsequent limits and dependencies for LinkedIn and X.
 
 ### Goals
 
 #### Technical testing
 
-El build, la preview local, las pruebas y `git diff --check` deben pasar.
+The build, local preview, tests and `git diff --check` must pass.
 
-Un ensayo debe demostrar que un artículo canónico aparece en pre sin tocar producción y que el mismo contenido queda listo para el build de `main`.
+Run a trial to show that a canonical article appears in pre without changing production. Verify that the same content is ready for the `main` build.
 
-Las skills modificadas o creadas deben superar su validación estructural.
+Modified or new skills must pass structural validation.
 
-Una rama con un solo artículo puede integrarse en `develop` y visualizarse mediante una URL local exacta sin cambiar producción.
+A branch with one article must be able to merge into `develop`. Its exact local URL must show the article without changing production.
 
-`docs/` contiene el único Markdown editorial; las copias para Astro son derivadas y reproducibles.
+`docs/` must contain the only editorial Markdown. Astro copies must be derived and reproducible.
 
-El contenido aprobado en pre es el que `main` construye y publica.
+The content approved in pre must be the content that `main` builds and publishes.
 
-El flujo bloquea ramas con más de un artículo, colisiones de adjuntos y diferencias entre la fuente canónica y su proyección.
+The flow must block branches with more than one article, attachment collisions and differences between the canonical source and its projection.
 
-LinkedIn y X permanecen separados de la publicación web y conservan copy, ejecución, confirmación y verificación independientes dentro de una única skill global.
+Keep LinkedIn and X separate from website publication. Within one global skill, keep copy, execution, confirmation and verification independent for each network.
 
-Cada anuncio incluye en su cuerpo el enlace exacto al artículo y se publica con una única imagen relevante; el texto es breve, natural y de tono académico-profesional, sin fórmulas estereotipadas o sintéticas.
+Each announcement must include the exact article link in its body and one relevant image. Keep the text short, natural and academic-professional in tone. Avoid stereotyped or synthetic formulas.
 
-Una solicitud de explicación activa la skill de publicación en modo didáctico: describe desarrollo, pre local, revisión, producción y difusión sin ejecutar ninguna transición ni confundir explicación con autorización.
+An explanation request must activate the publication skill’s teaching mode. Describe development, local pre, review, production and distribution without executing transitions. Do not treat an explanation request as authorization.
 
-Pruebas Node para descubrimiento, nombres, copia reproducible, colisiones y rechazo de estructuras inválidas.
+Run Node tests for discovery, names, reproducible copying, collisions and rejection of invalid structures.
 
-Ensayo del diff de una rama de artículo frente a `develop`, aceptando una única carpeta canónica y rechazando cambios ajenos.
+Test the article branch diff against `develop`. Accept one canonical folder and reject unrelated changes.
 
-Build completo del corpus existente y comparación de las rutas generadas.
+Build the complete existing corpus. Compare the generated paths.
 
-Preview local con respuesta HTTP 200 para el artículo esperado.
+Verify an HTTP 200 response for the expected article in local preview.
 
-Validación estructural de las skills y comprobación de sincronía entre `.agents/skills/` y `.claude/skills/`.
+Validate skill structure. Check synchronization between `.agents/skills/` and `.claude/skills/`.
 
-Confirmación de que `.github/workflows/deploy.yml` solo despliega `main`.
+Confirm that `.github/workflows/deploy.yml` deploys only `main`.
 
 #### Functional testing
 
-Implantar el recorrido rama de artículo → `develop` y preview local → `main` y producción.
+Implement the article branch → `develop` and local preview → `main` and production path.
 
-Mantener `docs/` como única fuente editorial y generar desde ella las superficies que Astro necesita para construir.
+Keep `docs/` as the only editorial source. Generate the surfaces that Astro needs to build from it.
 
-Comunicar la URL local exacta del artículo durante pre y verificar la URL online después de producción.
+Report the exact local article URL during pre. Verify the online URL after production.
 
-Preparar en una segunda entrega del mismo issue un automatismo conjunto para anunciar artículos verificados en LinkedIn y X, después de validar el ciclo web, manteniendo ejecución y confirmación independientes por red.
+In a second delivery of the same issue, prepare combined automation to announce verified articles on LinkedIn and X. First validate the web cycle. Keep execution and confirmation independent for each network.
 
-Cada artículo tiene su propio issue de contribución documental y nace en
-`article/<issue-number>-<slug>`, creada desde `develop`. La rama solo añade
-`docs/YYYY-MM-DD-<slug>/`, con un Markdown homónimo y sus adjuntos. Al terminar
-la redacción se integra en `develop`.
+Each article must have its own documentary contribution issue. Create its branch as `article/<issue-number>-<slug>` from `develop`. The branch must add only `docs/YYYY-MM-DD-<slug>/`, with a Markdown of the same name and its attachments. Merge into `develop` when writing is complete.
 
-Desde `develop`, el flujo de publicación genera el contenido Astro desde
-`docs/`, construye el sitio, inicia la preview local y comunica la URL exacta
-del artículo. Si se solicitan cambios, se realizan en la misma rama del
-artículo, se vuelven a integrar y se repite la preview.
+From `develop`, the publication flow must generate Astro content from `docs/`, build the site, start local preview and report the exact article URL. Make requested changes in the same article branch. Merge again and repeat preview.
 
-Tras la aprobación explícita, `develop` se integra en `main`. El workflow de
-GitHub Pages publica el sitio y el proceso verifica la URL online. Solo después
-se pueden preparar o publicar anuncios independientes en LinkedIn y X.
+After explicit approval, merge `develop` into `main`. The GitHub Pages workflow publishes the site. Verify the online URL. Only then may independent LinkedIn and X announcements be prepared or published.
 
-Todo fallo de validación, build, preview, despliegue o verificación detiene el
-recorrido y se comunica sin afirmar que la etapa haya terminado.
+Stop the path on any validation, build, preview, deployment or verification failure. Report the failure without claiming that the stage is complete.

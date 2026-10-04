@@ -98,9 +98,7 @@ The skill `publish-pantagruel-article` must have two operational boundaries: pre
 - **Publication**: Include article preparation, local preview, approval, production, and verification.
 - **Distribution**: Include subsequent limits and dependencies for LinkedIn and X.
 
-## Acceptance criteria and testing
-
-### Technical
+### Specifications
 
 - **Build and preview**: The build, local preview, tests, and `git diff --check` must pass. Record the results.
 - **Pre and production isolation**: Run a trial to show that a canonical article appears in pre without changing production. Verify that the same content is ready for the `main` build.
@@ -119,6 +117,8 @@ The skill `publish-pantagruel-article` must have two operational boundaries: pre
 - **Skill synchronization**: Validate skill structure and check synchronization between `.agents/skills/` and `.claude/skills/`.
 - **Production workflow**: Confirm that `.github/workflows/deploy.yml` deploys only `main`.
 - **Recorded checks**: Identify checks that passed, failed, and are pending.
+
+## Acceptance criteria and testing
 
 ### Functional
 

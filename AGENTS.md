@@ -62,7 +62,3 @@ Verify production first.
 Write short, natural invitations with an academic-professional tone.
 Include the exact article link and one relevant image with alternative text in each announcement.
 Obtain separate final confirmation for each network before each external publication.
-
-## Downstream continuous integration
-
-Read `$downstream-ci` for the integration policy. Integrate numbered contribution branches through validated pull requests into `downstream/develop`, without mandatory GitHub approvals or status checks. After merge, return the clean worktree to setup to develop. For a distinct personal or Pantagruel upstream, prepare a clean numbered branch and use a PR into upstream develop. Validate publication changes before the release PR into main. This policy supersedes earlier integration instructions where they conflict. Keep corporate upstream procedures unchanged.

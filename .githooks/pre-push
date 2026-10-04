@@ -23,7 +23,7 @@ normalize_remote() {
 
 remote_name="${1:-}"
 remote_url="${2:-}"
-origin_url="$(git remote get-url origin 2>/dev/null || true)"
+origin_url="$(git remote get-url downstream 2>/dev/null || true)"
 upstream_url="$(git remote get-url upstream 2>/dev/null || true)"
 
 refs="$(cat)"
@@ -44,7 +44,7 @@ delegate_to_lfs() {
 }
 
 # La barrera solo aplica cuando el destino es upstream y ademas upstream es un
-# repositorio distinto de origin. La comparacion es sobre URLs normalizadas:
+# repositorio distinto de downstream. La comparacion es sobre URLs normalizadas:
 # un mismo repositorio puede escribirse de varias formas equivalentes.
 guard_applies=1
 if [[ "$remote_name" != "upstream" && "$(normalize_remote "$remote_url")" != "$(normalize_remote "$upstream_url")" ]]; then
@@ -79,7 +79,7 @@ if [[ "$guard_applies" -eq 1 ]]; then
     while read -r commit; do
       if git diff-tree --no-commit-id --name-only -r --root "$commit" -- "${private_paths[@]}" | grep -q .; then
         echo "Push a upstream bloqueado: $local_ref introduce rutas personales en el commit $commit." >&2
-        echo "Cuando origin y upstream son distintos, el contenido personal vive solo en origin." >&2
+        echo "Cuando downstream y upstream son distintos, el contenido personal vive solo en downstream." >&2
         echo "Prepara la promocion local con scripts/promote-to-upstream." >&2
         exit 1
       fi

@@ -47,7 +47,7 @@ autorización para ejecutar el flujo.
 
 1. Resolver un artículo concreto e inequívoco. Exigir que carpeta y Markdown compartan `YYYY-MM-DD-<slug>` y que los adjuntos permanezcan en esa carpeta.
 2. Revisar el estado, actualizar referencias remotas y confirmar que la issue, la rama y el artículo mantienen trazabilidad 1:1.
-3. Inspeccionar `git diff --name-status origin/develop...HEAD`. Exigir que todas las rutas pertenezcan a una única carpeta canónica `docs/YYYY-MM-DD-<slug>/`; rechazar más carpetas de artículo o cualquier cambio no relacionado.
+3. Inspeccionar `git diff --name-status downstream/develop...HEAD`. Exigir que todas las rutas pertenezcan a una única carpeta canónica `docs/YYYY-MM-DD-<slug>/`; rechazar más carpetas de artículo o cualquier cambio no relacionado.
 4. Validar el Markdown y sus adjuntos con las pruebas y comandos vigentes del repositorio. No reproducir manualmente la lógica del generador.
 5. Integrar la rama del artículo en `develop` mediante el mecanismo habitual del repositorio, sin publicar `main`.
 

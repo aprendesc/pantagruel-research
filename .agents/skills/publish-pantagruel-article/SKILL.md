@@ -32,7 +32,7 @@ Define necessary Git terms. Show useful commands and URLs beside the applicable 
 
 1. Identify one specific, unambiguous article. Require the folder and Markdown to share `YYYY-MM-DD-<slug>`. Keep attachments in that folder.
 2. Review the state and update remote references. Confirm 1:1 traceability between the issue, branch, and article.
-3. Inspect `git diff --name-status origin/develop...HEAD`. Require every path to belong to one canonical `docs/YYYY-MM-DD-<slug>/` folder. Reject additional article folders or unrelated changes.
+3. Inspect `git diff --name-status downstream/develop...HEAD`. Require every path to belong to one canonical `docs/YYYY-MM-DD-<slug>/` folder. Reject additional article folders or unrelated changes.
 4. Validate Markdown and attachments with the repository's current tests and commands. Do not manually reproduce the generator's logic.
 5. Integrate the article branch into `develop` with the repository's usual mechanism. Do not publish `main`.
 

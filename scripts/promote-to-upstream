@@ -16,9 +16,9 @@ fail() { echo "Promocion no preparada: $*" >&2; exit 1; }
 [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]] && { usage; exit 0; }
 [[ $# -ge 1 && $# -le 3 ]] || { usage >&2; exit 2; }
 target_branch="$1"; source_ref="${2:-develop}"; target_ref="refs/remotes/upstream/$target_branch"; base_branch="${3:-}"; publication_branch="publish/$target_branch"; publication_ref="refs/heads/$publication_branch"
-origin_url="$(git remote get-url origin 2>/dev/null)" || fail "falta el remoto origin."
+origin_url="$(git remote get-url downstream 2>/dev/null)" || fail "falta el remoto downstream."
 upstream_url="$(git remote get-url upstream 2>/dev/null)" || fail "falta el remoto upstream."
-[[ "$(normalize_remote "$origin_url")" != "$(normalize_remote "$upstream_url")" ]] || fail "origin y upstream son el mismo repositorio; usa un merge o PR normal."
+[[ "$(normalize_remote "$origin_url")" != "$(normalize_remote "$upstream_url")" ]] || fail "downstream y upstream son el mismo repositorio; usa un merge o PR normal."
 git rev-parse --verify --quiet "${source_ref}^{commit}" >/dev/null || fail "no existe el source ref '$source_ref'."
 git rev-parse --verify --quiet "${target_ref}^{commit}" >/dev/null || fail "no existe '$target_ref'. Jira/Sherpa debe crear primero la rama corporativa y despues debes ejecutar 'git fetch upstream'."
 source_oid="$(git rev-parse "${source_ref}^{commit}")"; target_oid="$(git rev-parse "${target_ref}^{commit}")"

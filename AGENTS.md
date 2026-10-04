@@ -20,7 +20,7 @@ The [GitHub Pages workflow](.github/workflows/deploy.yml) runs the tests and dep
 
 ## **Editorial workflow and branches**
 
-- **Origin.** `origin` is `aprendesc/pantagruel-research`, the development repository. Integrate ordinary work into `origin/develop`.
+- **Downstream.** `downstream` is `aprendesc/pantagruel-research`, the development repository. Integrate ordinary work into `downstream/develop`.
 - **Upstream.** `upstream` is `pantagruel-alpha/pantagruel-research`, the shared destination. Publish there only at the user's explicit request.
 
 Apply the 1:1 editorial relationship: one issue, one branch, one article.
@@ -63,6 +63,6 @@ Write short, natural invitations with an academic-professional tone.
 Include the exact article link and one relevant image with alternative text in each announcement.
 Obtain separate final confirmation for each network before each external publication.
 
-## Personal continuous integration
+## Downstream continuous integration
 
-Follow [the repository CI policy](.github/personal-ci/README.md). Integrate numbered contribution branches into `origin/develop` without required unit tests. For a distinct personal or Pantagruel upstream, prepare a clean numbered branch and use a PR into upstream develop. Validate publication changes before the release PR into main. This policy supersedes earlier integration instructions where they conflict. Keep corporate upstream procedures unchanged.
+Read `$downstream-ci` for the integration policy. Integrate numbered contribution branches through validated pull requests into `downstream/develop`, without mandatory GitHub approvals or status checks. After merge, return the clean worktree to setup to develop. For a distinct personal or Pantagruel upstream, prepare a clean numbered branch and use a PR into upstream develop. Validate publication changes before the release PR into main. This policy supersedes earlier integration instructions where they conflict. Keep corporate upstream procedures unchanged.

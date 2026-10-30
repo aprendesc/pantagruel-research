@@ -18,7 +18,7 @@ The implementation branch is `feature/1-automate-pantagruel-research-publication
 ### Consolidated evidence and decisions
 
 - **2026-08-10 11:46**: The issue was reactivated and refined with the agreed article-branch cycle, local pre in `develop`, and production in `main`.
-- **2026-08-10 11:46**: The contract path was corrected to `context/issues/1-automate-pantagruel-research-publication.md`. The Development Methodology wrapper was adopted, and the branch `feature/1-automate-pantagruel-research-publication` was recorded.
+- **2026-08-10 11:46**: The contract path was corrected to `context/issues/1-automate-pantagruel-research-publication/1-automate-pantagruel-research-publication.md`. The Development Methodology wrapper was adopted, and the branch `feature/1-automate-pantagruel-research-publication` was recorded.
 - **2026-08-10 11:52**: A methodology audit added `Labels`, completed the technical and documentary parameters, and aligned the article-branch rule with the traceability format `article/<issue-number>-<slug>`.
 - **2026-08-10 12:08**: Reproducible synchronization, local preview, production protection, separate publication skills for LinkedIn and X, and path fixes for attachments, social metadata, and RSS were implemented.
 - **2026-08-10 12:13**: Validation passed: 10 Node tests, an Astro build of 18 pages, HTTP 200 responses for articles and assets, official validation of all six skills, and a synchronization check between harnesses.

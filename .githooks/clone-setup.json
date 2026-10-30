@@ -1,0 +1,6 @@
+{
+  "repository": "pantagruel-research",
+  "downstream_url": "git@github.com-aprendesc:aprendesc/pantagruel-research.git",
+  "upstream_url": "git@github.com-pantagruel:pantagruel-alpha/pantagruel-research.git",
+  "local_env_files": []
+}

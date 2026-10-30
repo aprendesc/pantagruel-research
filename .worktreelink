@@ -1,3 +1,5 @@
+# Legacy resource declarations for existing linked worktrees.
+# Independent clones use .githooks/clone-setup.py; environments remain local.
 # Estado local que todos los worktrees deben compartir con el checkout principal.
 #
 # Las rutas terminadas en `/` son raices administradas: el hook las crea en el

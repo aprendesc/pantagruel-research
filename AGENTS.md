@@ -33,3 +33,5 @@ This repository is the editorial space and technical blog of Pantagruel Alpha. I
 Use the local publication and announcement skills. Write articles in Spanish unless another language is requested. Preserve evidence, readable analysis and the original article corpus.
 
 Downstream: `aprendesc/pantagruel-research`; upstream: `pantagruel-alpha/pantagruel-research`. Ordinary development uses downstream `develop`; site publication follows the reviewed upstream release flow. Generated content is not the authoring source. A historical site URL does not prove the current release is deployed.
+
+Local clone safeguards and configuration: [.githooks/CLONE.md](.githooks/CLONE.md).

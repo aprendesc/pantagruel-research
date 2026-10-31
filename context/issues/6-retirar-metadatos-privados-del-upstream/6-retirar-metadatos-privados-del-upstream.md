@@ -3,7 +3,7 @@
 ## Execution plan
 
 - [x] 1. Verify remote exposure and preserve integrated historical work.
-- [ ] 2. Prepare and validate a minimal upstream main cleanup contribution.
+- [x] 2. Prepare and validate a minimal upstream main cleanup contribution.
 - [ ] 3. Review publication and restore synchronized downstream standby.
 
 ## Context
@@ -34,3 +34,5 @@ Prepared patch and immutable proposed-tree evidence under local_volume/shared/up
 ### 3. Review publication and restore synchronized downstream standby
 
 Publish a numbered cleanup branch and PR. Preserve main history; do not bundle unrelated develop product changes into upstream. Verify final refs, PR state, and local clean develop. Downstream synchronization is explicitly authorized. No rewriting historical commits.
+
+Publication branch passed the full installed hook chain. Upstream PR: https://github.com/pantagruel-alpha/pantagruel-research/pull/8. The PR is open for review; no upstream merge or deployment has been performed.

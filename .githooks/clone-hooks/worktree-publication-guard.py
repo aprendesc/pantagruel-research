@@ -37,7 +37,7 @@ def main():
             sys.exit("Push blocked: the worktree mechanism belongs only in downstream.")
         revision = local_oid if set(remote_oid) == {"0"} else remote_oid + ".." + local_oid
         for commit in git("rev-list", revision).splitlines():
-            if git("diff-tree", "--root", "-m", "--no-commit-id", "--name-only", "-r", commit, "--", *paths):
+            if git("diff-tree", "--diff-filter=ACMRT", "--root", "-m", "--no-commit-id", "--name-only", "-r", commit, "--", *paths):
                 sys.exit("Push blocked: incoming upstream history contains the worktree mechanism.")
 
 

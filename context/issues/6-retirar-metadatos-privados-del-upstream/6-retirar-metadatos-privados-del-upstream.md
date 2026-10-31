@@ -4,7 +4,7 @@
 
 - [x] 1. Verify remote exposure and preserve integrated historical work.
 - [x] 2. Prepare and validate a minimal upstream main cleanup contribution.
-- [ ] 3. Review publication and restore synchronized downstream standby.
+- [x] 3. Review publication and restore synchronized downstream standby.
 
 ## Context
 
@@ -36,3 +36,7 @@ Prepared patch and immutable proposed-tree evidence under local_volume/shared/up
 Publish a numbered cleanup branch and PR. Preserve main history; do not bundle unrelated develop product changes into upstream. Verify final refs, PR state, and local clean develop. Downstream synchronization is explicitly authorized. No rewriting historical commits.
 
 Publication branch passed the full installed hook chain. Upstream PR: https://github.com/pantagruel-alpha/pantagruel-research/pull/8. The PR is open for review; no upstream merge or deployment has been performed.
+
+### Completion — 2026-10-31
+
+User authorized repair of all confirmed violations. Upstream PR https://github.com/pantagruel-alpha/pantagruel-research/pull/9 merged as `55f80538749c9ce62b82ab91ce6f55bf28136990` after required validation. V2 passed all seven repository tests; Research passed Personal policy and Integration. CI contract checks were updated to accept metadata-free publication. Main snapshots contain no private methodology paths. Application and article blobs were preserved; only validation/CI files were added to the previously approved cleanup delta. The unique issue-74 commit is retained in downstream/archive/74-trade-source-checkpoint and a recovery bundle. All 32 obsolete upstream work branches are removed. Final downstream synchronization is recorded in the closeout PR and external standby evidence.

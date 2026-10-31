@@ -1,5 +1,7 @@
 # Functional validation: upstream cleanup. Run from any directory.
 # %% [0] Verify immutable proposal and preserve product blobs
+import sys
+sys.dont_write_bytecode = True
 import importlib.util
 import json
 import os

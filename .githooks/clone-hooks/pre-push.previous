@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Guardian de publicacion hacia upstream, con delegacion a Git LFS.
+#
+# `core.hooksPath` sustituye por completo a `.git/hooks`, de modo que este
+# fichero desplaza al `pre-push` que instala Git LFS. Como ese hook es el
+# mecanismo que sube los objetos LFS al servidor, aqui hay que delegarle
+# explicitamente: de lo contrario se publicarian los punteros sin su contenido.
+#
+# Git entrega las refs por stdin y solo pueden leerse una vez, asi que se
+# capturan al principio y se reparten entre la barrera y LFS.
+
+normalize_remote() {
+  local u="${1:-}"
+  u="${u%.git}"
+  u="${u#https://}"; u="${u#http://}"; u="${u#ssh://}"
+  u="${u#*@}"
+  u="${u/://}"
+  u="$(printf '%s' "$u" | sed -E 's#^([a-zA-Z0-9.]+\.[a-z]+)-[A-Za-z0-9_-]+/#\1/#')"
+  printf '%s' "$u" | tr 'A-Z' 'a-z'
+}
+
+remote_name="${1:-}"
+remote_url="${2:-}"
+origin_url="$(git remote get-url downstream 2>/dev/null || true)"
+upstream_url="$(git remote get-url upstream 2>/dev/null || true)"
+
+refs="$(cat)"
+
+uses_lfs() {
+  git config --get filter.lfs.clean >/dev/null 2>&1
+}
+
+delegate_to_lfs() {
+  if uses_lfs; then
+    if ! command -v git-lfs >/dev/null 2>&1; then
+      echo "Este repositorio usa Git LFS pero 'git-lfs' no esta en el PATH." >&2
+      echo "Sin el, el push subiria punteros sin su contenido." >&2
+      exit 2
+    fi
+    printf '%s\n' "$refs" | git lfs pre-push "$remote_name" "$remote_url"
+  fi
+}
+
+# La barrera solo aplica cuando el destino es upstream y ademas upstream es un
+# repositorio distinto de downstream. La comparacion es sobre URLs normalizadas:
+# un mismo repositorio puede escribirse de varias formas equivalentes.
+guard_applies=1
+if [[ "$remote_name" != "upstream" && "$(normalize_remote "$remote_url")" != "$(normalize_remote "$upstream_url")" ]]; then
+  guard_applies=0
+fi
+if [[ "$(normalize_remote "$origin_url")" == "$(normalize_remote "$upstream_url")" ]]; then
+  guard_applies=0
+fi
+
+# El push va a proceder: subir los objetos LFS que le corresponden.
+delegate_to_lfs
+
+exit 0

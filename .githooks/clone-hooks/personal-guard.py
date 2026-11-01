@@ -31,7 +31,7 @@ try:
     # For a new branch, exclude history already fetched from the shared develop.
     base=git('rev-parse','refs/remotes/upstream/develop');revision=base+'..'+local_oid
    else:revision=remote_oid+'..'+local_oid
-   for commit in git('rev-list',revision).splitlines():
+   for commit in git('rev-list',revision,'--not','--remotes=upstream').splitlines():
     changed=[p for p in git('diff-tree','--root','-m','--diff-filter=ACMRT','--no-commit-id','--name-only','-z','-r',commit).split('\0') if p]
     if any(private(p) for p in changed):stop('incoming history contains private content.')
 except (OSError,ValueError,IndexError,subprocess.CalledProcessError):stop('the destination or proposed history cannot be verified.')

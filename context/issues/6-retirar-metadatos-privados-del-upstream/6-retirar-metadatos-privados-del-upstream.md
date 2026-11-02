@@ -27,7 +27,7 @@ Fetched upstream and verified main exposure. Removed only integrated remote bran
 
 ### 2. Prepare and validate a minimal upstream main cleanup contribution
 
-Prepared patch and immutable proposed-tree evidence under local_volume/shared/upstream-remediation-20261031/pantagruel-research/. All product blobs must remain identical to upstream main. The pre-push chain must allow deletion of previously exposed metadata while rejecting its introduction. Validate the proposal with validate-upstream-cleanup.py.
+Prepared patch and immutable proposed-tree evidence under local-volume/shared/upstream-remediation-20261031/pantagruel-research/. All product blobs must remain identical to upstream main. The pre-push chain must allow deletion of previously exposed metadata while rejecting its introduction. Validate the proposal with validate-upstream-cleanup.py.
 
 ---
 

@@ -7,7 +7,7 @@ import json
 import os
 from pathlib import Path
 repo = Path(__file__).resolve().parents[3]
-evidence = repo.parent / "local_volume/shared/upstream-remediation-20261031" / repo.name / "validation.json"
+evidence = repo.parent / "local-volume/shared/upstream-remediation-20261031" / repo.name / "validation.json"
 proposal = json.loads(evidence.read_text())
 spec = importlib.util.spec_from_file_location("publication", repo / ".githooks/clone-hooks/publication.py")
 pub = importlib.util.module_from_spec(spec)

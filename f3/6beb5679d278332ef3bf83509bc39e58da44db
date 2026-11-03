@@ -1,0 +1,21 @@
+context/project-map.md
+  s_0983f3ad19760e::t_ae970584bfa65f 1-231
+context/tests/article_publication_site_functional_test.py
+  s_0983f3ad19760e::t_8d5fdaf54dce3f 1-155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "f36beb5679d278332ef3bf83509bc39e58da44db",
+  "prompts": {},
+  "sessions": {
+    "s_0983f3ad19760e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "59e76768-7faa-43f8-b9f7-272bee3facc7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "pantagruel-alpha <pantagruelalpha@gmail.com>"
+    }
+  }
+}

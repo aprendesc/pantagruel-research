@@ -1,0 +1,21 @@
+.githooks/CLONE.md
+  s_139c5b0b4fd436::t_b2107807c18b1d 28
+.githooks/clone-hooks/methodology-guard.py
+  s_139c5b0b4fd436::t_0ac1e85939cb33 255-269,279
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "39187adfccfebb37df42d8eb407e228350565138",
+  "prompts": {},
+  "sessions": {
+    "s_139c5b0b4fd436": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "766d04d0-e11d-4a2d-8b5d-ca09e5063317",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "pantagruel-alpha <pantagruelalpha@gmail.com>"
+    }
+  }
+}

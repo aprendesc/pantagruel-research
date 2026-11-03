@@ -274,7 +274,7 @@ def pre_push(remote, url, lines):
 # ----- post-merge / post-commit -----
 
 def private_snapshot(commit):
-    names = {p for p in tree_names(commit) if private(p)}
+    names = {p for p in tree_names(commit) if private(p) and not p.startswith('.githooks/')}  # Hooks follow their baseline.
     agents = git('cat-file', 'blob', commit + ':AGENTS.md', check=False) if 'AGENTS.md' in names else ''
     return names, set(LINK.findall(agents))
 

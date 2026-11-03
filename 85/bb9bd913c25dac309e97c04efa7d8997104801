@@ -1,0 +1,19 @@
+.githooks/clone-hooks/methodology-guard.py
+  s_966c51d23770bf::t_d107c222097bda 277
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "85bb9bd913c25dac309e97c04efa7d8997104801",
+  "prompts": {},
+  "sessions": {
+    "s_966c51d23770bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "139ffca3-fa73-48c5-9cde-5d47c12f1ac2",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "pantagruel-alpha <pantagruelalpha@gmail.com>"
+    }
+  }
+}

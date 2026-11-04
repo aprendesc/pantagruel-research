@@ -14,9 +14,9 @@ El responsable histórico es `aprendesc`. El registro antiguo indicaba Backlog, 
 - [pantagruel-research-social-announce](../../../.agents/skills/pantagruel-research-social-announce/SKILL.md): anuncios independientes por red.
 
 ---
-## Diff (delta_time: 04/11/2026 21:58)
+## Diff (delta_time: 04/11/2026 22:22)
 
-DU/IU (🔴 / 🔴) · IU/ID (🔴 / 🔴) · DU/DD (🔵 0 / 🟢 8) · DD/ID (🔴 / 🔴)
+DU/IU (🔴 / 🔴) · IU/ID (🔴 / 🔴) · DU/DD (🔵 0 / 🔵 0) · DD/ID (🔴 / 🔴)
 DU = pantagruel-alpha/pantagruel-research:develop (pendiente)\
 IU = pantagruel-alpha/pantagruel-research:🔴 (pendiente)\
 ID = aprendesc/pantagruel-research:🔴 (aprendesc)\

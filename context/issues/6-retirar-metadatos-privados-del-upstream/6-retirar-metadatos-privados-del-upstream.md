@@ -9,7 +9,7 @@ La presente migración conserva los tres pasos completados, sus decisiones y val
 ---
 ## Diff
 
-DU/IU (🔴 / 🔴) · IU/ID (🔴 / 🔴) · DU/DD (🔵 0 / 🟢 8) · DD/ID (🔴 / 🔴)
+DU/IU (🔴 / 🔴) · IU/ID (🔴 / 🔴) · DU/DD (🔵 0 / 🔵 0) · DD/ID (🔴 / 🔴)
 DU = pantagruel-alpha/pantagruel-research:develop (pendiente)\
 IU = pantagruel-alpha/pantagruel-research:🔴 (pendiente)\
 ID = aprendesc/pantagruel-research:🔴 (aprendesc)\

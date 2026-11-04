@@ -14,7 +14,15 @@ El responsable histórico es `aprendesc`. El registro antiguo indicaba Backlog, 
 - [pantagruel-research-social-announce](../../../.agents/skills/pantagruel-research-social-announce/SKILL.md): anuncios independientes por red.
 
 ---
-## Diff (delta_time: 04/11/2026 14:10)
+## Diff (delta_time: 04/11/2026 21:58)
+
+DU/IU (🔴 / 🔴) · IU/ID (🔴 / 🔴) · DU/DD (🔵 0 / 🟢 8) · DD/ID (🔴 / 🔴)
+DU = pantagruel-alpha/pantagruel-research:develop (pendiente)\
+IU = pantagruel-alpha/pantagruel-research:🔴 (pendiente)\
+ID = aprendesc/pantagruel-research:🔴 (aprendesc)\
+DD = aprendesc/pantagruel-research:develop (aprendesc)
+
+**Cómputo:** DU/DD e IU/ID excluyen archivos privados y trazas privadas de `.gitignore` según el filtro canónico de publicación; DD/ID y DU/IU incluyen el árbol completo. Cada par cuenta cambios desde su ancestro común hacia la rama izquierda / derecha.
 
 ```text
 Comparación histórica pendiente: no hay rama de tarea local conservada; develop no equivale al diff de la contribución.

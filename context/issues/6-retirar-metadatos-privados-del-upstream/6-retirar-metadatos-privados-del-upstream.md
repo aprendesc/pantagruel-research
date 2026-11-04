@@ -9,6 +9,14 @@ La presente migración conserva los tres pasos completados, sus decisiones y val
 ---
 ## Diff
 
+DU/IU (🔴 / 🔴) · IU/ID (🔴 / 🔴) · DU/DD (🔵 0 / 🟢 8) · DD/ID (🔴 / 🔴)
+DU = pantagruel-alpha/pantagruel-research:develop (pendiente)\
+IU = pantagruel-alpha/pantagruel-research:🔴 (pendiente)\
+ID = aprendesc/pantagruel-research:🔴 (aprendesc)\
+DD = aprendesc/pantagruel-research:develop (aprendesc)
+
+**Cómputo:** DU/DD e IU/ID excluyen archivos privados y trazas privadas de `.gitignore` según el filtro canónico de publicación; DD/ID y DU/IU incluyen el árbol completo. Cada par cuenta cambios desde su ancestro común hacia la rama izquierda / derecha.
+
 ```text
 Comparación histórica no recalculada: cierre registrado en 55f80538749c9ce62b82ab91ce6f55bf28136990.
 Base de la validación histórica: primer padre de ese commit.

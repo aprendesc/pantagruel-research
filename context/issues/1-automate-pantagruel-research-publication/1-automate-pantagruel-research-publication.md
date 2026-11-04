@@ -1,13 +1,160 @@
-## Context
+# feature/1-automate-pantagruel-research-publication · [Issue #1](https://github.com/aprendesc/pantagruel-research/issues/1) · PR pendiente
 
-### Contribution record
+## Context (delta_time: 04/11/2026 14:10)
 
-- **Skills**: This contract declares the `documental-contribution` skills.
-- **Status**: The contribution is in Backlog.
+### Descripción
+
+Automatiza el ciclo editorial de Pantagruel Research: una fuente Markdown por artículo, generación reproducible del sitio y revisión local antes de publicar. Es una contribución de código y herramientas de publicación, aunque su registro antiguo la etiquetaba documental. El histórico registra entregas de agosto de 2026; la migración no reabre despliegues ni anuncios.
+
+### Specialized skills
+
+- [publish-pantagruel-article](../../../.agents/skills/publish-pantagruel-article/SKILL.md): publicación editorial y revisión local.
+- [pantagruel-research-social-announce](../../../.agents/skills/pantagruel-research-social-announce/SKILL.md): anuncios con autorización independiente.
+
+---
+## Diff (delta_time: 04/11/2026 14:10)
+
+```text
+Comparación histórica pendiente: no hay rama de tarea local conservada; develop no equivale al diff de la contribución.
+```
+
+---
+## Test Profiling (delta_time: 04/11/2026 14:10)
+
+**Script de test funcional:** `context/issues/1-automate-pantagruel-research-publication/article_publication_functional_test.py`.
+
+### Árbol de abstracción
+
+```text
+A0 Celda
+└── A1 Validación funcional
+    └── A2 Aplicación y recursos
+```
+
+### context/issues/1-automate-pantagruel-research-publication/article_publication_functional_test.py :: Sync the real article corpus
+
+```text
+LOW · A1
+Celda de entrada: # %% [0] Sync the real article corpus
+Descripción: Sync the real article corpus; comprueba el mecanismo local sin publicar ni operar servicios externos.
+── Configuración ─────────────────────────────
+└── article_publication_functional_test.py
+    └── cell_id = "0"
+
+── Diagrama ──────────────────────────────────
+┌────────────────────────────────────────────────────────────────────┐
+│ (1) article_publication_functional_test.run_cell("0") -> state (a) │ ───▶ [ (2) assert state["article_slugs"] ]
+└────────────────────────────────────────────────────────────────────┘
+R ← docs/
+W → src/content/blog/; public/articles/
+
+── Visor de variables y validaciones ──────────
+(a) state · len(state["article_slugs"]) = 2
+[OK] (2) assert state["article_slugs"]
+```
+
+### context/issues/1-automate-pantagruel-research-publication/article_publication_functional_test.py :: Attachment projection and fail-closed validation
+
+```text
+LOW · A1
+Celda de entrada: # %% [1] Attachment projection and fail-closed validation
+Descripción: Attachment projection and fail-closed validation; comprueba el mecanismo local sin publicar ni operar servicios externos.
+── Configuración ─────────────────────────────
+└── article_publication_functional_test.py
+    └── cell_id = "1"
+
+── Diagrama ──────────────────────────────────
+┌────────────────────────────────────────────────────────────────────┐
+│ (1) article_publication_functional_test.run_cell("1") -> state (a) │ ───▶ [ (2) assert ok.returncode == 0 and bad.returncode != 0 ]
+└────────────────────────────────────────────────────────────────────┘
+R ← scripts/sync-articles.mjs
+W → directorios temporales del escenario
+
+── Visor de variables y validaciones ──────────
+(a) state · state["bad"].returncode = 1
+[OK] (2) assert ok.returncode == 0 and bad.returncode != 0
+```
+
+### context/issues/1-automate-pantagruel-research-publication/article_publication_functional_test.py :: Build the static site
+
+```text
+LOW · A1
+Celda de entrada: # %% [2] Build the static site
+Descripción: Build the static site; comprueba el mecanismo local sin publicar ni operar servicios externos.
+── Configuración ─────────────────────────────
+└── article_publication_functional_test.py
+    └── cell_id = "2"
+
+── Diagrama ──────────────────────────────────
+┌────────────────────────────────────────────────────────────────────┐
+│ (1) article_publication_functional_test.run_cell("2") -> state (a) │ ───▶ [ (2) assert build.returncode == 0 and published ]
+└────────────────────────────────────────────────────────────────────┘
+R ← corpus y configuración Astro
+W → dist/
+
+── Visor de variables y validaciones ──────────
+(a) state · len(state["published"]) = 2
+[OK] (2) assert build.returncode == 0 and published
+```
+
+### context/issues/1-automate-pantagruel-research-publication/article_publication_functional_test.py :: Serve and read the built site
+
+```text
+LOW · A1
+Celda de entrada: # %% [3] Serve and read the built site
+Descripción: Serve and read the built site; comprueba el mecanismo local sin publicar ni operar servicios externos.
+── Configuración ─────────────────────────────
+└── article_publication_functional_test.py
+    └── cell_id = "3"
+
+── Diagrama ──────────────────────────────────
+┌────────────────────────────────────────────────────────────────────┐
+│ (1) article_publication_functional_test.run_cell("3") -> state (a) │ ───▶ [ (2) assert home[0] == 200 and feed[0] == 200 and missing[0] == 404 ]
+└────────────────────────────────────────────────────────────────────┘
+R ← dist/
+C → http://127.0.0.1:43999/pantagruel-research/
+
+── Visor de variables y validaciones ──────────
+(a) state · state["home"][0] = 200
+[OK] (2) assert home[0] == 200 and feed[0] == 200 and missing[0] == 404
+```
+
+---
+## Persistence (delta_time: 04/11/2026 14:10)
+
+```text
+Local · raíz del repositorio
+├── docs/                         fuente editorial versionada
+├── src/content/blog/             proyección generada
+├── public/articles/              recursos generados
+└── dist/                         build local derivado
+GitHub Pages · publicación externa no ejecutada por esta migración
+```
+
+---
+## Execution plan (delta_time: 04/11/2026 14:10)
+
+### Secuencia de ejecución
+
+**Autonomía de la migración:** HIGH; no amplía la autorización histórica de publicación.
+
+1. [OK] **Etapa 1 — Revalidar el ciclo local:** sincronización, adjuntos, build y lectura HTTP mediante las celdas 0–3.
+2. [GATE] **Etapa 2 — Publicación y anuncios:** únicamente tras decisión humana, fuera de esta migración privada.
+
+### Etapa 1 — Revalidar el ciclo local
+
+- **Detalles y especificaciones:** las celdas 0–3 del script de issue reutilizan las celdas reales del validador global. No se sustituyen por simulaciones ni se publica externamente. Se conserva a continuación la especificación y evidencia histórica completa.
+
+- **Context:**
+
+- **Historical contribution record:**
+
+- **Skills**: This contract declares the `coding-contract-guidelines` skills.
+- **Historical status:** The source listed Backlog; the implementation reports below do not establish current GitHub status.
 - **Owner**: `aprendesc` is responsible for the contribution.
-- **Traceability**: Keep the labels `skill:documental-contribution` and the milestone `001 — Publicación editorial`.
+- **Historical traceability:** The source used the now-deprecated label `skill:documental-contribution` and milestone `001 — Publicación editorial`; this is provenance, not an instruction to invoke that removed methodology.
 
-### Editorial cycle
+- **Editorial cycle:**
 
 Pantagruel Research needs a repeatable editorial cycle. The cycle must keep one canonical Markdown file for each article, allow local review before publication, and allow social distribution only after production has been verified.
 
@@ -15,7 +162,7 @@ The agreed flow is: create a branch for one article from `develop`; merge it int
 
 The implementation branch is `feature/1-automate-pantagruel-research-publication`. The current workflow already deploys `main`. The commands `npm run build` and `astro preview` have been verified locally at `http://127.0.0.1:4321/pantagruel-research/`.
 
-### Consolidated evidence and decisions
+- **Consolidated evidence and decisions:**
 
 - **2026-08-10 11:46**: The issue was reactivated and refined with the agreed article-branch cycle, local pre in `develop`, and production in `main`.
 - **2026-08-10 11:46**: The contract path was corrected to `context/issues/1-automate-pantagruel-research-publication/1-automate-pantagruel-research-publication.md`. The Development Methodology wrapper was adopted, and the branch `feature/1-automate-pantagruel-research-publication` was recorded.
@@ -28,13 +175,13 @@ The implementation branch is `feature/1-automate-pantagruel-research-publication
 - **2026-08-16**: `functional-specs` and `technical-specs` were removed. The existing functional and technical contract retains their decisions and validation criteria.
 - **2026-08-16**: The separate LinkedIn and X skills were merged into the global skill `pantagruel-research-social-announce`. The skill retains separate copy, preview, confirmation, publication, and verification for each network.
 
-### Preserved source material
+- **Preserved source material:**
 
-The sections below retain reports, designs, decisions, questions, and evidence from the contribution history. They do not become binding requirements only because they appear here. The active requirements come from `Restrictions`, the non-binding guidance in `Guide`, when present, and the conditions in `Goals`.
+The sections below retain reports, designs, decisions, questions, and evidence from the contribution history. They do not become binding requirements only because they appear here. Historical source below preserves the original requirements and evidence; pending execution is governed by this stage specification.
 
-### Technical design
+- **Technical design:**
 
-#### Key decisions
+- **Key decisions:**
 
 1. `docs/` is the only versioned editorial source. Generate the Astro collection and served attachments before each build.
 2. Pre must run `npm run build` followed by `npm run preview -- --host 127.0.0.1`. Do not deploy remotely or use a Git hook.
@@ -42,7 +189,7 @@ The sections below retain reports, designs, decisions, questions, and evidence f
 4. Keep the existing production workflow limited to `main`. Run the same synchronization through the npm cycle.
 5. The first delivery of this issue must implement Development → Pre → Pro. The second delivery must address LinkedIn and X through one global skill, based on the validated website cycle.
 
-#### Architecture
+- **Architecture:**
 
 ```text
 article/<issue-number>-<slug>
@@ -64,7 +211,7 @@ Resolve relative attachment references during projection without changing canoni
 
 The skill `publish-pantagruel-article` must have two operational boundaries: preview from `develop`, and production from `main` after confirmation. It must not duplicate synchronization logic. It must call the script, build, and preview.
 
-### Restrictions
+- **Restrictions:**
 
 - **Article branch**: Each article branch must contain exactly one article and its attachments.
 - **Production branch**: `develop` must never deploy to the Internet. `main` is the only production branch.
@@ -74,11 +221,11 @@ The skill `publish-pantagruel-article` must have two operational boundaries: pre
 - **Compatibility**: Keep existing URLs, articles, and unrelated changes.
 - **Instructions**: Keep instructions short, imperative, and self-contained. Separate development, local pre, production, and external distribution. Do not duplicate this issue contract in `AGENTS.md`.
 
-### Guide
+- **Guide:**
 
 - **Surfaces**: Node/Astro code, npm configuration, editorial workflow, project context, and local skills.
 - **Coding guidelines**: Use a minimal, explicit implementation that follows repository JavaScript/Astro conventions.
-- **Governing skill**: Use `documental-contribution` for `AGENTS.md` and the skills.
+- **Governing skill**: Use `coding-contract-guidelines` for `AGENTS.md` and the skills.
 - **Target paths**: `AGENTS.md`, `scripts/`, `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `.gitignore`, `.github/workflows/deploy.yml`, `src/components/BaseHead.astro`, `src/pages/rss.xml.js`, `.agents/skills/`, `.claude/skills/`, and `tests/`.
 - **Purpose and outcomes**: Write each article once. Review it as a local website. Publish it online only after approval.
 - **Scope and exclusions**: Include the editorial cycle, its automation, and distribution skills. Exclude a remote pre environment and actual publication of an article or announcement during implementation.
@@ -92,13 +239,13 @@ The skill `publish-pantagruel-article` must have two operational boundaries: pre
 - **Format**: `markdown`.
 - **Target path**: `AGENTS.md`, `.agents/skills/publish-pantagruel-article/SKILL.md`, `.claude/skills/publish-pantagruel-article/SKILL.md`, and `~/.codex/skills/pantagruel-research-social-announce/SKILL.md`.
 
-### Table of contents
+- **Table of contents:**
 
 - **Project context**: Record the durable “one branch, one article” decision and the relationship between `develop` and `main`.
 - **Publication**: Include article preparation, local preview, approval, production, and verification.
 - **Distribution**: Include subsequent limits and dependencies for LinkedIn and X.
 
-### Specifications
+- **Specifications:**
 
 - **Build and preview**: The build, local preview, tests, and `git diff --check` must pass. Record the results.
 - **Pre and production isolation**: Run a trial to show that a canonical article appears in pre without changing production. Verify that the same content is ready for the `main` build.
@@ -118,9 +265,9 @@ The skill `publish-pantagruel-article` must have two operational boundaries: pre
 - **Production workflow**: Confirm that `.github/workflows/deploy.yml` deploys only `main`.
 - **Recorded checks**: Identify checks that passed, failed, and are pending.
 
-## Acceptance criteria and testing
+- **Acceptance criteria and testing:**
 
-### Functional
+- **Functional:**
 
 - **End-to-end publication**: Implement and verify the article branch → `develop` and local preview → `main` and production path.
 - **Single editorial source**: Keep `docs/` as the only editorial source. Generate the surfaces that Astro needs to build from it.
@@ -131,30 +278,17 @@ The skill `publish-pantagruel-article` must have two operational boundaries: pre
 - **Production and distribution**: After explicit approval, merge `develop` into `main`. The GitHub Pages workflow publishes the site. Verify the online URL. Only then may separate LinkedIn and X announcements be prepared or published.
 - **Failure handling**: Stop the flow on any validation, build, preview, deployment, or verification failure. Report the failure. Do not claim that the stage is complete.
 
-## Execution plan
 
-The source contract does not identify current execution owners or model IDs for these plan steps. Keep them pending until they are assigned. The historical evidence above records completed work; it does not verify the current state of every acceptance criterion.
 
-1. [ ] **Validate the article branch and canonical source**: Responsible: pending `[model ID pending]`. Check the article branch against `develop`. Confirm one canonical article folder, its matching Markdown file, and its attachments. Reject unrelated changes and invalid structures.
-2. [ ] **Generate and preview the site locally**: Responsible: pending `[model ID pending]`. Run synchronization, build, and local preview from `develop`. Verify the exact article URL, attachments, generated paths, and that production does not change.
-3. [ ] **Approve and publish production**: Responsible: pending `[model ID pending]`. After explicit approval, merge `develop` into `main`; verify that GitHub Pages deploys the approved content and that the online URL works.
-4. [ ] **Prepare and verify separate social announcements**: Responsible: pending `[model ID pending]`. After production verification, prepare LinkedIn and X announcements with independent copy, execution, confirmation, and verification. Include the exact article link and one relevant image in each announcement.
-5. [ ] **Record validation and failures**: Responsible: pending `[model ID pending]`. Record build, preview, test, skill-structure, synchronization, deployment, and URL checks. Report any failure and leave its stage incomplete.
+- **Registro de desarrollo:** migración del contrato y asociación explícita del script de issue; validación actual superada en las cuatro celdas: 2 artículos sincronizados, carpeta inválida rechazada (exit 1), build correcto, páginas/feed HTTP 200 y ruta inexistente HTTP 404. Los resultados de agosto siguen siendo históricos.
 
-```text
-Issue #1 — Automate Pantagruel Research publication
+### Etapa 2 — Publicación y anuncios
 
-1 [model ID pending] **Validate the article branch and canonical source** — Validation gate
-    |
-    v
-2 [model ID pending] **Generate and preview the site locally** — Validation gate
-    |
-    v
-3 [model ID pending] **Approve and publish production** — Approval gate
-    |
-    v
-4 [model ID pending] **Prepare and verify separate social announcements** — Delivery gate
-    |
-    v
-5 [model ID pending] **Record validation and failures** — Validation gate
-```
+- **GATE:** aprobación explícita antes de merge a main, despliegue y cada anuncio externo.
+- **Detalles y especificaciones:** conservar el flujo editorial y las autorizaciones registradas arriba; no ejecutar esta etapa como efecto de la homologación.
+- **Registro de desarrollo:** sin nueva publicación.
+
+---
+## Results and reporting (delta_time: 04/11/2026 14:10)
+
+Contrato histórico de automatización editorial homologado; los requisitos y reportes anteriores se conservan. El script de issue valida mecanismos locales reales reutilizando el global; cuatro celdas superadas el 04/11/2026 sobre el código local. Ningún despliegue ni anuncio se realizó.

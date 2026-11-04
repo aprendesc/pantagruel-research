@@ -10,7 +10,7 @@ This repository is the editorial space and technical blog of Pantagruel Alpha. I
 - **Derived application:** the generated Astro collection and public assets.
 - **Editorial contribution:** an article and its scoped issue; interface changes are software contributions.
 
-## Project map
+## Repository overview
 
 - [docs](docs/): article folders named `YYYY-MM-DD-<slug>` with their resources.
 - [scripts/sync-articles.mjs](scripts/sync-articles.mjs): source-to-site conversion.
@@ -30,7 +30,7 @@ This repository is the editorial space and technical blog of Pantagruel Alpha. I
 ## Methodologies and references
 
 [`development-methodology`](/Users/alejandroprendes/.codex/skills/development-methodology/SKILL.md).
-Use the local publication and announcement skills. Write articles in Spanish unless another language is requested. Preserve evidence, readable analysis and the original article corpus.
+For code issues, use [coding-contract-guidelines](/Users/alejandroprendes/.codex/skills/coding-contract-guidelines/SKILL.md) and [functional-testing-guidelines](/Users/alejandroprendes/.codex/skills/functional-testing-guidelines/SKILL.md). Keep the contract and issue validation script together in `context/issues/<issue>/`; each stable cell implements a registered validation mechanism tracked in Test Profiling. Global scenarios remain in `context/tests/`. Documentary articles retain their authoring and publication rules. Use the local publication and announcement skills. Write articles in Spanish unless another language is requested. Preserve evidence, readable analysis and the original article corpus.
 
 Downstream: `aprendesc/pantagruel-research`; upstream: `pantagruel-alpha/pantagruel-research`. Ordinary development uses downstream `develop`; site publication follows the reviewed upstream release flow. Generated content is not the authoring source. A historical site URL does not prove the current release is deployed.
 

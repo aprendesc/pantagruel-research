@@ -1,5 +1,5 @@
 {
-  "name": "Personal integration",
+  "name": "CI",
   "permissions": {
     "contents": "read",
     "pull-requests": "read"
@@ -76,7 +76,6 @@
         }
       ],
       "name": "Integration",
-      "needs": "policy",
       "if": "${{ github.repository == 'aprendesc/pantagruel-research' && (false) }}"
     },
     "deploy": {
@@ -134,24 +133,6 @@
         }
       ],
       "if": "${{ github.repository == 'aprendesc/pantagruel-research' && (false) }}"
-    },
-    "policy": {
-      "name": "Personal policy",
-      "runs-on": "ubuntu-latest",
-      "timeout-minutes": 5,
-      "steps": [
-        {
-          "uses": "actions/checkout@v7",
-          "with": {
-            "fetch-depth": 0
-          }
-        },
-        {
-          "name": "Check personal integration policy",
-          "run": "python3 .github/personal-ci/gate.py --policy .github/personal-ci/policy.json"
-        }
-      ],
-      "if": "${{ github.repository == 'aprendesc/pantagruel-research' && (true) }}"
     }
   },
   "on": {

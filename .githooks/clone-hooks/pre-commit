@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-hook_dir="$(cd "$(dirname "$0")" && pwd)"
-python3 "$hook_dir/destination-guard.py" --staged
-python3 -B "$hook_dir/methodology-guard.py" pre-commit

@@ -20,6 +20,8 @@ Preserve the configured APC Harness project context and all current authorized r
 
 Project Contexto and hydration hashes were verified. Commit and push must pass the installed hooks. This project change is descriptive context and its local maintenance contract; no application source change is introduced.
 
+The inherited workflow referenced missing personal-CI files. Restored gate.py and policy.json byte-for-byte from repository revision 5a0e155c30183caa375cd97990d4348c62026ede. The policy rules are unchanged. Verified that the numbered downstream PR is accepted, an unnumbered branch is rejected, and upstream publication with private paths is rejected. Registered these restored files as downstream hydration exclusions.
+
 ## Delivery
 
 The setup branch is prepared for downstream publication and integration into develop. Completion is verified against remote branch heads and a clean local working tree; no application deployment is authorized.
